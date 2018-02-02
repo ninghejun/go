@@ -227,7 +227,7 @@ func (name handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	p := pprof.Lookup(string(name))
 	if p == nil {
 		w.WriteHeader(404)
-		fmt.Fprintf(w, "Unknown profile: %s\n", name)
+		fmt.Fprintf(w, "Unknown profile: %s\n", template.HTMLEscapeString(string(name)))
 		return
 	}
 	gc, _ := strconv.Atoi(r.FormValue("gc"))
